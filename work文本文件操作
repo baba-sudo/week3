@@ -1,0 +1,12 @@
+#文本文件操作
+#编写一个程序demo.py，要求运行该程序后，生成demo_new.py文件，其中内容与demo.py一样，只是在每一行的后面加上行号以#开始，并且所有行的#符号垂直对齐。
+
+filename = 'demo.py'
+with open(filename, 'r') as fp:
+    lines = fp.readlines()
+maxLength = len(max(lines, key=len))
+
+lines = [line.rstrip().ljust(maxLength)+'#'+str(index)+'\n'
+         for index, line in enumerate(lines)]
+with open(filename[:-3]+'_new.py', 'w') as fp:
+    fp.writelines(lines)
